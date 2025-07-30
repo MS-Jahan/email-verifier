@@ -1,0 +1,18 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  email-verifier:
+    # Build the docker image from the Dockerfile in the current directory
+    build: .
+    image: email-verifier-app
+    container_name: email-verifier
+    restart: unless-stopped
+    ports:
+      # Map port 8080 of the host to port 8080 of the container.
+      # If you changed the port in the Dockerfile, change it here as well.
+      - "8080:8080"
+    environment:
+      # Set Gin to release mode for production
+      - GIN_MODE=release
+      # You can add other environment variables here if the application needs them.
